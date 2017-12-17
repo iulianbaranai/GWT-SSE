@@ -1,0 +1,10 @@
+<module rename-to="GwtSseDemo">
+
+    <inherits name="com.google.gwt.user.User" />
+    <inherits name="com.google.gwt.logging.Logging"/>
+    <source path="client"/>
+
+    <!-- Specify the app entry point class. -->
+    <entry-point class='com.sse.demo.client.GwtSseDemo'/>
+
+</module>

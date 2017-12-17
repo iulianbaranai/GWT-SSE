@@ -1,0 +1,92 @@
+<html>
+<head>
+
+    <title>GWT SSE Demo</title>
+
+    <link type="text/css" rel="stylesheet" href="resources/index.css">
+    <script type="text/javascript" language="javascript" src="GwtSseDemo/GwtSseDemo.nocache.js"></script>
+    <iframe src="javascript:''" id="__gwt_historyFrame" style="width:0;height:0;border:0"></iframe>
+    <script src=/resources/eventsource-polyfill.js></script>
+
+    <script>
+
+        var eventSource = new EventSource('/rest/resources/sse.subscribe');
+        eventSource.onopen = function (event) { replaceContent(getStateContainer(), "Open"); }
+        eventSource.onerror = function (event) { replaceContent(getStateContainer(), "Error"); }
+        eventSource.onmessage = function (event) { replaceContent(getStateContainer(), "Message"); }
+
+        eventSource.addEventListener('server-time', function (event) {
+            replaceContent(getTimeMessagesContainer(), event.data);
+        });
+
+        eventSource.addEventListener('custom-message', function (event) {
+            appendContent(getCustomMessagesContainer(), event.data);
+        });
+
+        function replaceContent(container, data) {
+
+            container.innerHTML = "";
+            appendContent(container, data);
+        }
+
+        function appendContent(container, data){
+
+            var div = document.createElement("DIV");
+            div.appendChild(document.createTextNode(data));
+            container.appendChild(div);
+        }
+
+        function getStateContainer(){
+            return document.getElementById('es-state');
+        }
+
+        function getTimeMessagesContainer(){
+            return document.getElementById('es-time-messages');
+        }
+
+        function getCustomMessagesContainer(){
+            return document.getElementById('es-custom-messages');
+        }
+
+    </script>
+
+</head>
+    <body>
+        <div>
+            <div class="col">
+                <h2>EventSource (js)</h2>
+            </div>
+            <div class="col">
+                <h2>EventSource (gwt)</h2>
+            </div>
+        </div>
+        <div>
+            <div class="col">
+                <ul id=es-state>
+                </ul>
+            </div>
+            <div class="col">
+                <ul id=gwt-es-state>
+                </ul>
+            </div>
+        </div>
+        <div>
+            <div class="col">
+                <ul id=es-time-messages>
+                </ul>
+            </div>
+            <div class="col">
+                <ul id=gwt-es-time-messages>
+                </ul>
+            </div>
+        </div>
+        <div>
+            <div class="col">
+                <ul id=es-custom-messages></ul>
+            </div>
+            <div class="col">
+                <ul id=gwt-es-custom-messages></ul>
+            </div>
+        </div>
+    </body>
+</html>
