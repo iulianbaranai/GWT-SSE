@@ -24,6 +24,8 @@ On the main page are displayed (for both Javascript and GWT subscribers):
 - the server time
 - any custom message fired through the custom endpoint (see /sse.broadcast)
 
+![Application](https://content.screencast.com/users/IulianB/folders/Jing/media/05b167b6-c945-4d5d-8b12-2f040fade95d/00001482.png)
+
 ## License
 
 MIT-licensed. See LICENSE
